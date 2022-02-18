@@ -1,0 +1,31 @@
+﻿@using EntityLayer.Concrete
+@model List<Gate>
+
+@{
+    ViewBag.Title = "GetList";
+    Layout = "~/Views/Shared/_AnimalLoverLayout.cshtml";
+}
+<br />
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Kapı No</th>
+        <th>Mahalle İsmi</th>
+        <th>Konuma Git</th>
+        <th>Tüm Konum Haritalarını Gör</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.GateId</th> @*th kalın yapar ifadeyi*@
+            <td>@item.GateNo</td>
+            <td>@item.Neighborhood.NeighborhoodName</td>
+            <td><a href="/Gate/GetById/@item.GateId" class="btn btn-primary">Konuma Git</a></td>
+            <td><a href="/Gate/GetListCoordinate/" class="btn btn-info">Bütün Beslenme Noktalarına Git</a></td>
+        </tr>
+    }
+
+</table>
+<br />
+

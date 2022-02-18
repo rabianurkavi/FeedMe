@@ -51,14 +51,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IAboutDal.cs" />
+    <Compile Include="Abstract\IAdminDal.cs" />
+    <Compile Include="Abstract\IAnimalDal.cs" />
+    <Compile Include="Abstract\IAnimalLoverDal.cs" />
+    <Compile Include="Abstract\IContactDal.cs" />
+    <Compile Include="Abstract\IContentDal.cs" />
+    <Compile Include="Abstract\IGateDal.cs" />
+    <Compile Include="Abstract\IHeadingDal.cs" />
+    <Compile Include="Abstract\IImageFileDal.cs" />
+    <Compile Include="Abstract\IMessageDal.cs" />
+    <Compile Include="Abstract\INeighborhoodDal.cs" />
     <Compile Include="Abstract\Repository\IRepository.cs" />
+    <Compile Include="Concrete\EntityFramework\EfAboutDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfAdminDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfAnimalDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfAnimalLoverDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfContactDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfContentDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfGateDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfHeadingDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfImageFileDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfMessageDal.cs" />
+    <Compile Include="Concrete\EntityFramework\EfNeighborhoodDal.cs" />
     <Compile Include="Concrete\FeedMeContext.cs" />
     <Compile Include="Concrete\Repository\GenericRepository.cs" />
+    <Compile Include="Migrations\202201051506398_add-mig.cs" />
+    <Compile Include="Migrations\202201051506398_add-mig.designer.cs">
+      <DependentUpon>202201051506398_add-mig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityLayer\EntityLayer.csproj">
+      <Project>{E5B010B5-9C44-4A9C-80B3-B721ECB72A8B}</Project>
+      <Name>EntityLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202201051506398_add-mig.resx">
+      <DependentUpon>202201051506398_add-mig.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

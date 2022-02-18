@@ -1,0 +1,22 @@
+﻿@model EntityLayer.Concrete.Animal
+
+@{  ViewBag.Title = "UpdateAnimal";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Kategori Güncelleme Sayfası</h2>
+@using (Html.BeginForm("UpdateAnimal","Animal", FormMethod.Post))
+{
+<div class="form-group">
+    @Html.Label("Hayvan ID")
+    @Html.TextBoxFor(x => x.AnimalId, new { @class = "form-control" })
+    <br />
+    @Html.Label("Hayvan Adı")
+    @Html.TextBoxFor(x => x.AnimalName, new { @class = "form-control" })
+    <br />
+    @Html.Label("Hayvan Açıklaması")
+    @Html.TextAreaFor(x => x.AnimalDescription, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success">Güncelle</button>
+</div>}
+

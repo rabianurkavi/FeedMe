@@ -1,0 +1,25 @@
+﻿@model EntityLayer.Concrete.Gate
+@{
+    ViewBag.Title = "GateEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("GateEdit", "Gate", FormMethod.Post))
+{
+    <h2>Kapı Güncelleme Sayfası</h2>
+    <div class="form-group">
+        @Html.Label("Kapı Numarasını Girin ")
+        @Html.TextBoxFor(x => x.GateNo, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.GateNo)
+        <br /><br />
+        @Html.Label("Mahalle:")
+        @Html.DropDownListFor(x => x.NeighborhoodId, (List<SelectListItem>)ViewBag.vnn, new { @class = "form-control" })
+        <br /><br />
+        @Html.Label("Kapı Koordinat Noktalarını Girin:")
+        @Html.TextBoxFor(x => x.GateCoordinate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.GateCoordinate)
+        <br /><br />
+        <button class="btn btn-info">Güncelle</button>
+    </div>
+}
+

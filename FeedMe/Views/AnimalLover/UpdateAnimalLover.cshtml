@@ -1,0 +1,43 @@
+﻿@model EntityLayer.Concrete.AnimalLover
+@{
+    ViewBag.Title = "UpdateAnimalLover";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Hayvansever Düzenleme Sayfası</h2>
+@using (Html.BeginForm("UpdateAnimalLover", "AnimalLover", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Hayvansever ID")
+        @Html.TextBoxFor(x => x.AnimalLoverId, new { @class = "form-control" })
+        <br /><br />
+        @Html.Label("Hayvansever Adı")
+        @Html.TextBoxFor(x => x.AnimalLoverName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AnimalLoverName, "", new { @class = "text-danger" })
+        <br /><br />
+        @Html.Label("Yazar Soyadı")
+        @Html.TextBoxFor(x => x.AnimalLoverSurName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AnimalLoverSurName, "", new { @class = "text-danger" })
+        <br /><br />
+        @Html.Label("Yazar Maili")
+        @Html.TextBoxFor(x => x.AnimalLoverMail, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AnimalLoverMail, "", new { @class = "text-danger" })
+        <br /><br />
+        @Html.Label("Yazar Şifresi")
+        @Html.TextBoxFor(x => x.AnimalLoverPassword, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AnimalLoverPassword, "", new { @class = "text-danger" })
+        <br /><br />
+        @Html.Label("Yazar Resmi")
+        @Html.TextBoxFor(x => x.AnimalLoverImage, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AnimalLoverImage, "", new { @class = "text-danger" })
+        <br /><br />
+        @Html.Label("Hayvansever Hakkında")
+        @Html.TextBoxFor(x => x.AnimalLoverAbout, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AnimalLoverAbout, "", new { @class = "text-danger" })
+        <br /><br />
+        <button class="btn btn-info">Değişiklikleri Kaydet</button>
+    </div>
+}
+
+

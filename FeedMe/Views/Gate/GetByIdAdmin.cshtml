@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "GetByIdAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://openlayers.org/en/v5.3.0/css/ol.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v5.3.0/build/ol.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<div id="map" class="map"></div>
+<script>
+    var cordinate = @Html.Raw(Json.Encode(ViewBag.ci));
+    var cordinates = cordinate.split(",");
+    console.log("koordinat:" + cordinates);
+    console.log("koordinat[0]: " + cordinates[0])
+    console.log("koordinat[1]: " + cordinates[1])
+    var vectorLayer = new ol.layer.Vector({ // VectorLayer({
+        source: new ol.source.Vector(),
+    });
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({ // TileLayer({
+                source: new ol.source.OSM()
+            }),
+            vectorLayer,
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: [3937931.982670892, 4707010.149529884],
+            zoom: 7
+        })
+    });
+    console.log(map.getInteractions());
+    var dblClickInteraction;
+    // find DoubleClickZoom interaction
+    map.getInteractions().getArray().forEach(function (interaction) {
+        if (interaction instanceof ol.interaction.DoubleClickZoom) {
+            dblClickInteraction = interaction;
+        }
+    });
+    // remove from map
+    map.removeInteraction(dblClickInteraction)
+    var vectorSource = vectorLayer.getSource();
+
+    function addMarker(coordinates) {
+        /*console.log(coordinates);*/
+        var marker = new ol.Feature(new ol.geom.Point(coordinates));
+        var zIndex = 1;
+        marker.setStyle(new ol.style.Style({
+            image: new ol.style.Icon(({
+                anchor: [0.5, 36],
+                anchorXUnits: "fraction",
+                anchorYUnits: "pixels",
+                opacity: 1,
+                src: "https://cdn.discordapp.com/attachments/863815722572841011/876896838286974987/daasdasdasd-min.png",
+                zIndex: zIndex
+            })),
+            zIndex: zIndex
+        }));
+        vectorSource.addFeature(marker);
+       // console.log("koordinat:"+coordinates);
+    }
+    //[3672187.7128764368, 4858031.769692662]
+
+    map.on('dblclick', function (evt) {
+
+        var Coordinate = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')[0] + "," + ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')[1];
+        $("#GateCoordinate").val(Coordinate);
+        console.log(evt.coordinate)
+        addMarker(evt.coordinate);
+    });
+    var south = 24.0;
+    var west = -125.8;
+    var north = 49.6;
+    var east = -66.4;
+    // [maxx, maxy, minx, miny]
+    var extent = ol.proj.transformExtent([east, north, west, south], 'EPSG:4326', 'EPSG:3857');
+    $(document).ready(function () {
+        var cordinate = [parseFloat(cordinates[0]), parseFloat(cordinates[1])]
+        addMarker(cordinate)
+    })
+
+</script>
+

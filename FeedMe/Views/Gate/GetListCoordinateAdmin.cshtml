@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "GetListCoordinateAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<a href="/Gate/GateAddAdmin" class="btn btn-info">Beslenme Noktası Ekle</a>
+<link rel="stylesheet" href="https://openlayers.org/en/v5.3.0/css/ol.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v5.3.0/build/ol.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<div id="map" class="map"></div>
+<script>
+    var vectorLayer = new ol.layer.Vector({ // VectorLayer({
+        source: new ol.source.Vector(),
+    });
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({ // TileLayer({
+                source: new ol.source.OSM()
+            }),
+            vectorLayer,
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: [3937931.982670892, 4707010.149529884],
+            zoom: 7
+        })
+    });
+    console.log(map.getInteractions());
+    var dblClickInteraction;
+    // find DoubleClickZoom interaction
+    map.getInteractions().getArray().forEach(function (interaction) {
+        if (interaction instanceof ol.interaction.DoubleClickZoom) {
+            dblClickInteraction = interaction;
+        }
+    });
+    // remove from map
+    map.removeInteraction(dblClickInteraction)
+    var vectorSource = vectorLayer.getSource();
+
+    //34.809409316101046, 39.817415457006916
+
+    function addMarker(coordinates) {
+        /*console.log(coordinates);*/
+        var marker = new ol.Feature(new ol.geom.Point(coordinates));
+        var zIndex = 1;
+        marker.setStyle(new ol.style.Style({
+            image: new ol.style.Icon(({
+                anchor: [0.5, 36],
+                anchorXUnits: "fraction",
+                anchorYUnits: "pixels",
+                opacity: 1,
+                src: "https://cdn.discordapp.com/attachments/863815722572841011/876896838286974987/daasdasdasd-min.png",
+                zIndex: zIndex
+            })),
+            zIndex: zIndex,
+        }));
+        vectorSource.addFeature(marker);
+    }
+
+    map.on('dblclick', function (evt) {
+
+        var Coordinate = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')[0] + "," + ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')[1];
+        $("#GateCoordinate").val(Coordinate);
+        console.log(evt.coordinate)
+        addMarker(evt.coordinate);
+    });
+
+
+    var south = 24.0;
+    var west = -125.8;
+    var north = 49.6;
+    var east = -66.4;
+    // [maxx, maxy, minx, miny]
+    var extent = ol.proj.transformExtent([east, north, west, south], 'EPSG:4326', 'EPSG:3857');
+    $(document).ready(function () {
+        var allCoordinates = @Html.Raw(Json.Encode(ViewBag.ci));
+        allCoordinates = allCoordinates.slice(0, -1);
+        var cordinates = allCoordinates.split(";");
+        console.log(cordinates);
+
+        for (var i = 0; i < cordinates.length; i++) {
+            var cr = cordinates[i].split(',')
+            var cordinate = [parseFloat(cr[0]), parseFloat(cr[1])];
+            var Coordinate = ol.proj.transform(cordinate, 'EPSG:4326', 'EPSG:3857')[0];
+            var Coordinate2 = ol.proj.transform(cordinate, 'EPSG:4326', 'EPSG:3857')[1];
+            var mark = [Coordinate, Coordinate2]
+            addMarker(mark)
+        }
+
+        //var cordinate = [parseFloat('34.809409316101046'), parseFloat('39.817415457006916')];
+        //var Coordinate = ol.proj.transform(cordinate, 'EPSG:4326', 'EPSG:3857')[0];
+        //var Coordinate2 = ol.proj.transform(cordinate, 'EPSG:4326', 'EPSG:3857')[1];
+        //var mark = [Coordinate, Coordinate2]
+        //addMarker(mark)
+    })
+
+</script>
+

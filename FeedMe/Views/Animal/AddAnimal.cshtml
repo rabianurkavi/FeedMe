@@ -1,0 +1,21 @@
+﻿@model EntityLayer.Concrete.Animal
+@{
+    ViewBag.Title = "AddAnimal";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+@using (Html.BeginForm("AddAnimal", "Animal", FormMethod.Post))//begin form htmlde ekleme veya güncelleme işlemlerinde yardımcı
+{
+    <div class="form-group">
+        @Html.Label("Hayvan Adı: ")
+        @Html.TextBoxFor(x => x.AnimalName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AnimalName)
+        <br /><br />
+        @Html.Label("Açıklamayı yazınız: ")
+        @Html.TextAreaFor(x => x.AnimalDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AnimalDescription)
+        <br /><br />
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+}
+
