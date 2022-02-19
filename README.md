@@ -16,6 +16,9 @@ beslenme noktası ekleme ve diğer hayvanseverlerle iletişime geçebilme, sözl
 ![Arayüz](https://github.com/rabianur412/FeedMe/blob/main/FeedMe/ReadMe/AnimalLover.png)
 ![Arayüz](https://github.com/rabianur412/FeedMe/blob/main/FeedMe/ReadMe/Galeri.png)
 ![Arayüz](https://github.com/rabianur412/FeedMe/blob/main/FeedMe/ReadMe/Galeri2.png)
+![](https://github.com/rabianur412/FeedMe/blob/main/FeedMe/ReadMe/AdminMesaj.png)
+![](https://github.com/rabianur412/FeedMe/blob/main/FeedMe/ReadMe/MesajDetay.png)
+![]()
 ![Arayüz](https://github.com/rabianur412/FeedMe/blob/main/FeedMe/ReadMe/Hakk%C4%B1m%C4%B1zda.png)
 **                       HAYVANSEVER ARAYÜZ**
 ![Arayüz](https://github.com/rabianur412/FeedMe/blob/main/FeedMe/ReadMe/Koordinat-ekleme.png)
